@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var Material = require('../db/models/material');
 var User = require('../db/models/users');
 var sequelizeObj = require('../db/sequelize');
 var sequelize = sequelizeObj.sequelize;
 
 router.get('/', function(req, res, next) {
-  User.findAll({})
-  .then(users=>{
-    res.json(users);
+    Material.findAll({})
+  .then(materials=>{
+    res.json(materials);
   })
   .catch(err=>{
     res.json({status:-1,message:err.message});
@@ -15,9 +16,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  User.findOne({where:{id:req.params.id}})
-  .then(user=>{
-    res.json(user);
+  Material.findOne({where:{id:req.params.id}})
+  .then(material=>{
+    res.json(material);
   })
   .catch(err=>{
     res.json({status:-1,message:err.message});
@@ -26,10 +27,10 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/',function(req, res, next){
   return sequelize.transaction(t=>{
-    if(!req.body.name || !req.body.hierarchy_id)
+    if(!req.body.code || !req.body.hierarchy_id)
       throw new Error('Information missing.');
-    return User.create({
-      name:req.body.name,
+    return Material.create({
+      code:req.body.code,
       hierarchy_id:req.body.hierarchy_id
     },{transaction:t})
   })
@@ -43,12 +44,12 @@ router.post('/',function(req, res, next){
 
 router.put('/:id',function(req, res, next){
   return sequelize.transaction(t=>{
-    return User.findOne({where:{id:req.params.id},transaction:t})
-    .then(user=>{
-      if(!user || user === null)
-        throw new Error('User not found.');
+    return Material.findOne({where:{id:req.params.id},transaction:t})
+    .then(material=>{
+      if(!material || material === null)
+        throw new Error('Material not found.');
       
-      return user.update(req.body,{transaction:t})
+      return material.update(req.body,{transaction:t})
     })
   })
   .then(results=>{
@@ -61,7 +62,7 @@ router.put('/:id',function(req, res, next){
 
 router.put('/:id',function(req, res, next){
   return sequelize.transaction(t=>{
-    return User.destroy({where:{id:req.params.id},transaction:t})
+    return Material.destroy({where:{id:req.params.id},transaction:t})
   })
   .then(results=>{
     res.json({status:0,message:'Created.'});
