@@ -1,0 +1,34 @@
+{
+  "name": "nestedsetsjs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/sequelize": "^4.28.4",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.11.0",
+    "typescript": "^3.5.3"
+  },
+  "description": "test packet for using nested sets with mysql",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergioratti/nestedsetsjs.git"
+  },
+  "author": "Sergio Ratti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergioratti/nestedsetsjs/issues"
+  },
+  "homepage": "https://github.com/sergioratti/nestedsetsjs#readme"
+}

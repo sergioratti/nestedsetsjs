@@ -1,0 +1,12 @@
+{
+    "development" :{
+        "DB_NAME" : "testnestedsets",
+        "DB_USERNAME" : "root",
+        "DB_PASSWORD" : "admin",
+        "options":{
+            "dialect" :"mysql" ,
+            "host":"localhost",
+            "port": 3306
+        }
+    }
+}
