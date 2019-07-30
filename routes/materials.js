@@ -21,13 +21,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/user/:user_id', function(req, res, next) {
 
-    /*
-   select * from materials m  
-where m.hierarchy_id in( 
-  select id from hierarchy
-  where (lft>=4 AND rgt<=5) OR (lft<4 AND rgt>5)
-)
-    */
     return User.findOne({include:[Hierarchy],where:{id:req.params.user_id}})
     .then(user=>{
         if(!user || user === null)
@@ -50,8 +43,6 @@ where m.hierarchy_id in(
     res.json({status:-1,message:err.message});
   })
 });
-
-
 
 router.get('/:id', function(req, res, next) {
   Material.findOne({where:{id:req.params.id}})
